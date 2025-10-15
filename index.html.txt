@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>אקדמיה לקסומים - חדר בריחה מתמטי</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; overflow: hidden;
+    }
+    .container { background: white; border-radius: 30px; padding: 30px; width: 90vw; height: 85vh; max-width: 1200px; max-height: 700px; box-shadow: 0 20px 60px rgba(0,0,0,.3); position: relative; overflow: auto; display: flex; align-items: center; justify-content: center; }
+    .container::before { content: '✨'; position: absolute; top: 20px; left: 20px; font-size: 40px; animation: twinkle 2s infinite; }
+    .container::after  { content: '⭐'; position: absolute; bottom: 20px; right: 20px; font-size: 40px; animation: twinkle 2s infinite 1s; }
+    @keyframes twinkle { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.2)} }
+    .schema { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+    .boxes-container { display: flex; gap: 30px; width: 100%; max-width: 700px; }
+    .box { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+    .box-label { font-size: 26px; font-weight: bold; color: #764ba2; text-align: center; padding: 0 10px; word-wrap: break-word; }
+    .box-input { background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); border: 4px solid #fdcb6e; border-radius: 20px; padding: 35px 25px; min-height: 130px; display: flex; align-items: center; justify-content: center; }
+    .box-input input { width: 100%; font-size: 44px; font-weight: bold; text-align: center; border: none; background: transparent; color: #2d3436; outline: none; }
+    .arrow { font-size: 60px; color: #764ba2; margin: 10px 0 8px 0; }
+    .result-box { background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); border: 4px solid #6c5ce7; border-radius: 20px; padding: 30px 40px; min-height: 120px; display: flex; align-items: center; justify-content: center; max-width: 380px; width: 100%; }
+    .result-label { font-size: 26px; font-weight: bold; color: #764ba2; text-align: center; margin-bottom: 10px; }
+    .result-box input { width: 100%; font-size: 44px; font-weight: bold; text-align: center; border: none; background: transparent; color: #fff; outline: none; }
+    button { margin-top: 15px; padding: 16px 50px; font-size: 23px; font-weight: bold; color: #fff; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 15px; cursor: pointer; transition: .3s; box-shadow: 0 5px 15px rgba(102,126,234,.4); }
+    button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(102,126,234,.6); }
+    button:active { transform: translateY(0); }
+    .message { margin-top: 15px; padding: 20px; border-radius: 15px; font-size: 22px; font-weight: bold; text-align: center; display: none; animation: fadeIn .5s; max-width: 800px; line-height: 1.4; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+    .success { background: linear-gradient(135deg, #55efc4, #00b894); color: #fff; border: 3px solid #00b894; display: block; }
+    .warning { background: linear-gradient(135deg, #fab1a0, #ff7675); color: #fff; border: 3px solid #ff7675; display: block; }
+    .error   { background: linear-gradient(135deg, #fd79a8, #e84393); color: #fff; border: 3px solid #e84393; display: block; }
+    .magic-wand { font-size: 30px; display: inline-block; animation: wave 1s infinite; }
+    @keyframes wave { 0%,100%{transform:rotate(0)} 25%{transform:rotate(20deg)} 75%{transform:rotate(-20deg)} }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="schema">
+      <div class="boxes-container">
+        <div class="box">
+          <div class="box-label">התחלה</div>
+          <div class="box-input">
+            <input type="text" id="whole" placeholder="">
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-label">שינוי</div>
+          <div class="box-input">
+            <input type="text" id="start" placeholder="">
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="result-label">סוף</div>
+      <div class="result-box">
+        <input type="text" id="end" placeholder="">
+      </div>
+
+      <button onclick="checkAnswer()">
+        <span class="magic-wand">🪄</span>
+        בדוק תשובה
+        <span cl
