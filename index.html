@@ -11,27 +11,41 @@
       background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
       height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; overflow:hidden;
     }
-    .container { background:#fff; border-radius:30px; padding:30px; width:90vw; height:85vh; max-width:1200px; max-height:700px; box-shadow:0 20px 60px rgba(0,0,0,.3); overflow:auto; display:flex; align-items:center; justify-content:center; position:relative }
+    .container { 
+      background:#fff; 
+      border-radius:30px; 
+      padding:40px; 
+      width:calc(100vh * 16 / 9);
+      height:100vh;
+      max-width:100vw;
+      aspect-ratio: 16/9;
+      box-shadow:0 20px 60px rgba(0,0,0,.3); 
+      overflow:auto; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      position:relative 
+    }
     .container::before{content:'✨'; position:absolute; top:20px; left:20px; font-size:40px; animation:twinkle 2s infinite}
     .container::after{content:'⭐'; position:absolute; bottom:20px; right:20px; font-size:40px; animation:twinkle 2s infinite 1s}
     @keyframes twinkle{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.5; transform:scale(1.2)}}
-    .schema{display:flex; flex-direction:column; align-items:center; gap:12px; width:100%}
-    .boxes-container{display:flex; gap:30px; width:100%; max-width:700px}
-    .box{flex:1; display:flex; flex-direction:column; gap:20px}
-    .box-label{font-size:26px; font-weight:bold; color:#764ba2; text-align:center}
-    .box-input{background:linear-gradient(135deg,#ffeaa7,#fdcb6e); border:4px solid #fdcb6e; border-radius:20px; padding:35px 25px; min-height:130px; display:flex; align-items:center; justify-content:center}
-    .box-input input{width:100%; font-size:44px; font-weight:bold; text-align:center; border:none; background:transparent; color:#2d3436; outline:none}
-    .arrow{font-size:60px; color:#764ba2; margin:10px 0 8px}
-    .result-label{font-size:26px; font-weight:bold; color:#764ba2; text-align:center; margin-bottom:10px}
-    .result-box{background:linear-gradient(135deg,#a29bfe,#6c5ce7); border:4px solid #6c5ce7; border-radius:20px; padding:30px 40px; min-height:120px; display:flex; align-items:center; justify-content:center; max-width:380px; width:100%}
-    .result-box input{width:100%; font-size:44px; font-weight:bold; text-align:center; border:none; background:transparent; color:#fff; outline:none}
-    button{margin-top:15px; padding:16px 50px; font-size:23px; font-weight:bold; color:#fff; background:linear-gradient(135deg,#667eea,#764ba2); border:none; border-radius:15px; cursor:pointer; transition:.3s; box-shadow:0 5px 15px rgba(102,126,234,.4)}
+    .schema{display:flex; flex-direction:column; align-items:center; gap:15px; width:100%; height:100%}
+    .boxes-container{display:flex; gap:40px; width:100%; max-width:800px; justify-content:center}
+    .box{flex:1; display:flex; flex-direction:column; gap:15px}
+    .box-label{font-size:32px; font-weight:bold; color:#764ba2; text-align:center}
+    .box-input{background:linear-gradient(135deg,#ffeaa7,#fdcb6e); border:4px solid #fdcb6e; border-radius:20px; padding:40px 30px; min-height:140px; display:flex; align-items:center; justify-content:center}
+    .box-input input{width:100%; font-size:52px; font-weight:bold; text-align:center; border:none; background:transparent; color:#2d3436; outline:none}
+    .arrow{font-size:70px; color:#764ba2; margin:5px 0}
+    .result-label{font-size:32px; font-weight:bold; color:#764ba2; text-align:center; margin-bottom:5px}
+    .result-box{background:linear-gradient(135deg,#a29bfe,#6c5ce7); border:4px solid #6c5ce7; border-radius:20px; padding:35px 45px; min-height:130px; display:flex; align-items:center; justify-content:center; max-width:450px; width:100%}
+    .result-box input{width:100%; font-size:52px; font-weight:bold; text-align:center; border:none; background:transparent; color:#fff; outline:none}
+    button{margin-top:15px; padding:18px 55px; font-size:26px; font-weight:bold; color:#fff; background:linear-gradient(135deg,#667eea,#764ba2); border:none; border-radius:15px; cursor:pointer; transition:.3s; box-shadow:0 5px 15px rgba(102,126,234,.4)}
     button:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(102,126,234,.6)}
-    .message{margin-top:15px; padding:20px; border-radius:15px; font-size:22px; font-weight:bold; text-align:center; display:none; max-width:800px; line-height:1.4}
+    .message{margin-top:15px; padding:25px; border-radius:15px; font-size:24px; font-weight:bold; text-align:center; display:none; max-width:900px; line-height:1.4}
     .success{background:linear-gradient(135deg,#55efc4,#00b894); color:#fff; border:3px solid #00b894; display:block}
     .warning{background:linear-gradient(135deg,#fab1a0,#ff7675); color:#fff; border:3px solid #ff7675; display:block}
     .error{background:linear-gradient(135deg,#fd79a8,#e84393); color:#fff; border:3px solid #e84393; display:block}
-    .magic-wand{font-size:30px; display:inline-block; animation:wave 1s infinite}
+    .magic-wand{font-size:32px; display:inline-block; animation:wave 1s infinite}
     @keyframes wave{0%,100%{transform:rotate(0)} 25%{transform:rotate(20deg)} 75%{transform:rotate(-20deg)}}
   </style>
 </head>
