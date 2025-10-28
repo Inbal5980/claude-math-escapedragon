@@ -1,452 +1,321 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="he">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>דרקון הנוצות הקסומות</title>
+    <title>חדר הבריחה המתמטי</title>
     <style>
-        body {
+        * {
             margin: 0;
-            padding: 10px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
-        
+
         .container {
+            width: 100%;
+            height: 100%;
+            max-width: 1400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .card {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
-            height: calc(100vh - 20px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 32px;
+            width: 100%;
+            max-width: 900px;
         }
-        
-        h1 {
-            color: #667eea;
-            text-align: center;
-            font-size: 1.5em;
-            margin: 10px 0;
-        }
-        
-        .story {
-            background: #f0f4ff;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 10px 0;
-            font-size: 1em;
-            line-height: 1.4;
-            border-right: 5px solid #667eea;
-            text-align: center;
-        }
-        
-        .main-content {
-            display: flex;
-            gap: 20px;
-            flex: 1;
-            align-items: center;
-            justify-content: space-around;
-        }
-        
-        .left-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .right-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .dragon-container {
-            text-align: center;
-        }
-        
-        .dragon {
-            font-size: 80px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .feathers-container {
+
+        .input-row {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 15px;
-            border: 3px dashed #667eea;
-            border-radius: 15px;
-            background: #f8f9ff;
-            transition: background 0.3s;
-            min-height: 120px;
-            max-width: 350px;
+            gap: 24px;
+            margin-bottom: 24px;
         }
-        
-        .basket-container {
+
+        .input-group {
             text-align: center;
         }
-        
-        .basket {
-            font-size: 60px;
-            margin-bottom: 5px;
-        }
-        
-        .basket-label {
-            font-size: 1.1em;
+
+        .label {
+            color: #6b46c1;
             font-weight: bold;
-            color: #764ba2;
-            margin-bottom: 10px;
+            font-size: 18px;
+            margin-bottom: 8px;
         }
-        
-        .basket-feathers {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 15px;
-            background: #fff9e6;
-            border: 3px solid #ffc107;
-            border-radius: 15px;
-            min-height: 100px;
-            max-width: 350px;
-        }
-        
-        .feather {
-            font-size: 40px;
-            animation: fadeIn 0.5s ease-in;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .feather.original {
-            filter: hue-rotate(0deg);
-        }
-        
-        .feather.new {
-            filter: hue-rotate(180deg) brightness(1.2);
-        }
-        
-        .feather:hover {
-            transform: scale(1.2) rotate(10deg);
-        }
-        
-        .new-feather {
-            animation: flyIn 1s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        @keyframes flyIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(-100px) rotate(180deg) scale(0);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-        }
-        
-        .counter {
+
+        .input-box {
+            width: 144px;
+            height: 80px;
+            font-size: 32px;
             text-align: center;
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #667eea;
-            padding: 10px;
-            background: #f0f4ff;
-            border-radius: 10px;
+            border: 4px solid #fbbf24;
+            border-radius: 16px;
+            background: #fef3c7;
+            outline: none;
+            transition: border-color 0.3s;
         }
-        
-        .buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 10px 0;
-            flex-wrap: wrap;
+
+        .input-box:focus {
+            border-color: #f59e0b;
         }
-        
-        button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: inherit;
-        }
-        
-        button:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        button:active {
-            transform: translateY(0);
-        }
-        
-        button:disabled {
-            background: #ccc;
+
+        .input-box:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
         }
-        
-        .answer-section {
-            text-align: center;
-            margin: 10px 0;
+
+        .result-box {
+            width: 192px;
+            height: 96px;
+            border: 4px solid #a78bfa;
+            background: #ede9fe;
         }
-        
-        input[type="number"] {
-            font-size: 1.3em;
-            padding: 8px;
-            width: 80px;
-            text-align: center;
-            border: 3px solid #667eea;
-            border-radius: 10px;
-            margin: 0 10px;
+
+        .result-box:focus {
+            border-color: #8b5cf6;
         }
-        
-        .feedback {
-            font-size: 1.2em;
+
+        .arrow {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .arrow-icon {
+            font-size: 32px;
+            color: #8b5cf6;
+        }
+
+        .result-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 20px;
             font-weight: bold;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .check-button {
+            background: linear-gradient(to right, #8b5cf6, #4f46e5);
+            color: white;
+        }
+
+        .check-button:hover {
+            background: linear-gradient(to right, #7c3aed, #4338ca);
+        }
+
+        .retry-button {
+            background: linear-gradient(to right, #fb923c, #ec4899);
+            color: white;
+            margin-top: 12px;
+        }
+
+        .retry-button:hover {
+            background: linear-gradient(to right, #f97316, #db2777);
+        }
+
+        .message {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 12px;
             text-align: center;
-            animation: fadeIn 0.5s;
+            font-size: 18px;
+            font-weight: 600;
+            direction: rtl;
         }
-        
-        .correct {
-            background: #d4edda;
-            color: #155724;
-            border: 3px solid #28a745;
+
+        .message.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 4px solid #86efac;
         }
-        
-        .incorrect {
-            background: #f8d7da;
-            color: #721c24;
-            border: 3px solid #dc3545;
+
+        .message.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 4px solid #fde047;
         }
-        
-        .step {
-            background: #fff3cd;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 10px;
-            border-right: 5px solid #ffc107;
-            font-size: 1em;
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 4px solid #fca5a5;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .sparkle {
+            display: inline-block;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🧙‍♂️ דרקון הנוצות הקסומות 🐉</h1>
-        
-        <div class="story">
-            לדרקון של הקוסמים הצעירים היו <strong>6 נוצות קסם</strong>. 
-            המורה נתן להם עוד <strong>2 נוצות חדשות</strong>.
-            <strong>כמה נוצות יש לדרקון עכשיו?</strong>
-        </div>
-        
-        <div class="main-content">
-            <div class="left-section">
-                <div class="dragon-container">
-                    <div class="dragon">🐉</div>
+        <div class="card">
+            <!-- תיבות התחלה ושינוי -->
+            <div class="input-row">
+                <div class="input-group">
+                    <div class="label">התחלה</div>
+                    <input type="text" id="firstNum" class="input-box" maxlength="2">
                 </div>
-                
-                <div class="counter" id="counter">
-                    נוצות הדרקון: <span id="count">6</span>
-                </div>
-                
-                <div class="feathers-container" id="feathers"></div>
-            </div>
-            
-            <div class="right-section">
-                <div class="basket-container">
-                    <div class="basket">🧺</div>
-                    <div class="basket-label">סל הנוצות של המורה<br>גרור 2 נוצות לדרקון!</div>
-                    <div class="basket-feathers" id="basket-feathers"></div>
+                <div class="input-group">
+                    <div class="label">שינוי</div>
+                    <input type="text" id="secondNum" class="input-box" maxlength="2">
                 </div>
             </div>
-        </div>
-        
-        <div class="buttons">
-            <button onclick="startExercise()">התחל תרגיל</button>
-            <button onclick="reset()">התחל מחדש</button>
-        </div>
-        
-        <div class="answer-section">
-            <div style="margin: 10px 0;">
-                <label style="font-size: 1.1em; font-weight: bold;">התשובה שלי:</label>
-                <input type="number" id="answer" min="0" max="20" placeholder="?" />
-                <button onclick="checkAnswer()">בדוק תשובה</button>
+
+            <!-- חץ -->
+            <div class="arrow">
+                <div class="arrow-icon">↓</div>
             </div>
+
+            <!-- תיבת סוף -->
+            <div class="result-section">
+                <div class="label">סוף</div>
+                <input type="text" id="result" class="input-box result-box" maxlength="2">
+            </div>
+
+            <!-- כפתור בדיקה -->
+            <button id="checkBtn" class="button check-button">
+                <span class="sparkle">✨</span>
+                <span>בדוק תשובה</span>
+                <span class="sparkle">✨</span>
+            </button>
+
+            <!-- הודעת משוב -->
+            <div id="message" class="message hidden"></div>
+
+            <!-- כפתור נסו שוב -->
+            <button id="retryBtn" class="button retry-button hidden">
+                🔄 נסו שוב
+            </button>
         </div>
-        
-        <div id="feedback"></div>
     </div>
 
     <script>
-        let dragonFeathers = 6;
-        let basketFeathers = 2;
-        let addedFeathers = 0;
-        let draggedFeather = null;
-        
-        function createFeather(container, id, isOriginal = true, isDraggable = false) {
-            const feather = document.createElement('div');
-            feather.className = isOriginal ? 'feather original' : 'feather new';
-            feather.textContent = '🪶';
-            feather.id = id;
-            
-            if (isDraggable) {
-                feather.draggable = true;
-                feather.style.cursor = 'grab';
-                
-                feather.addEventListener('dragstart', (e) => {
-                    draggedFeather = e.target;
-                    e.target.style.opacity = '0.5';
-                    e.target.style.cursor = 'grabbing';
-                });
-                
-                feather.addEventListener('dragend', (e) => {
-                    e.target.style.opacity = '1';
-                    e.target.style.cursor = 'grab';
-                });
-            }
-            
-            container.appendChild(feather);
-        }
-        
-        function updateDisplay() {
-            document.getElementById('count').textContent = dragonFeathers;
-            
-            const dragonContainer = document.getElementById('feathers');
-            dragonContainer.innerHTML = '';
-            
-            // 6 נוצות מקוריות
-            for (let i = 0; i < 6; i++) {
-                createFeather(dragonContainer, `dragon-feather-${i}`, true, false);
-            }
-            
-            // נוצות שנוספו (בצבע שונה)
-            for (let i = 0; i < addedFeathers; i++) {
-                createFeather(dragonContainer, `added-feather-${i}`, false, false);
-            }
-            
-            const basketContainer = document.getElementById('basket-feathers');
-            basketContainer.innerHTML = '';
-            for (let i = 0; i < basketFeathers; i++) {
-                createFeather(basketContainer, `basket-feather-${i}`, false, true);
-            }
-        }
-        
-        function setupDragAndDrop() {
-            const dragonArea = document.getElementById('feathers');
-            
-            dragonArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dragonArea.style.background = '#e8f4f8';
-            });
-            
-            dragonArea.addEventListener('dragleave', () => {
-                dragonArea.style.background = '';
-            });
-            
-            dragonArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dragonArea.style.background = '';
-                
-                if (draggedFeather && draggedFeather.id.startsWith('basket-feather')) {
-                    draggedFeather.remove();
-                    basketFeathers--;
-                    dragonFeathers++;
-                    addedFeathers++;
-                    updateDisplay();
-                    
-                    if (addedFeathers === 1) {
-                        document.getElementById('feedback').innerHTML = 
-                            '<div class="step">יפה מאוד! גררת נוצה אחת! גרור עוד נוצה אחת... 🪶</div>';
-                    } else if (addedFeathers === 2) {
-                        document.getElementById('feedback').innerHTML = 
-                            '<div class="step">מעולה! גררת 2 נוצות! עכשיו ספור כמה נוצות יש לדרקון! 🤔</div>';
-                    }
-                }
-            });
-        }
-        
-        function startExercise() {
-            dragonFeathers = 6;
-            basketFeathers = 2;
-            addedFeathers = 0;
-            document.getElementById('feedback').innerHTML = 
-                '<div class="step">הדרקון מתחיל עם 6 נוצות קסם! 🪶<br>עכשיו גרור 2 נוצות מהסל של המורה אל הדרקון! 👆</div>';
-            document.getElementById('answer').value = '';
-            updateDisplay();
-        }
-        
+        const firstNumInput = document.getElementById('firstNum');
+        const secondNumInput = document.getElementById('secondNum');
+        const resultInput = document.getElementById('result');
+        const checkBtn = document.getElementById('checkBtn');
+        const retryBtn = document.getElementById('retryBtn');
+        const messageDiv = document.getElementById('message');
+
+        let isCorrect = false;
+
         function checkAnswer() {
-            const answer = parseInt(document.getElementById('answer').value);
-            const feedback = document.getElementById('feedback');
-            
-            if (isNaN(answer)) {
-                feedback.innerHTML = '<div class="step">אנא הכנס מספר 🔢</div>';
+            const firstNum = firstNumInput.value.trim();
+            const secondNum = secondNumInput.value.trim();
+            const result = resultInput.value.trim();
+
+            // בדיקה אם כל השדות מלאים
+            if (!firstNum || !secondNum || !result) {
+                showMessage('❌ אופס! עליך למלא את כל השדות', 'error');
                 return;
             }
-            
-            if (answer === 8 && dragonFeathers === 8) {
-                feedback.innerHTML = `
-                    <div class="feedback correct">
-                        🎉 כל הכבוד! התשובה נכונה! 🎉
-                        <br>
-                        6 נוצות + 2 נוצות = 8 נוצות
-                        <br>
-                        הדרקון מאושר מאוד! 🐉✨
-                    </div>
-                `;
-            } else if (dragonFeathers !== 8) {
-                feedback.innerHTML = `
-                    <div class="feedback incorrect">
-                        💭 תחילה גרור 2 נוצות מהסל!
-                    </div>
-                `;
-            } else {
-                feedback.innerHTML = `
-                    <div class="feedback incorrect">
-                        💭 לא בדיוק... נסה שוב!
-                        <br>
-                        רמז: ספור את כל הנוצות שליד הדרקון 🪶
-                    </div>
-                `;
+
+            const num1 = parseInt(firstNum);
+            const num2 = parseInt(secondNum);
+            const res = parseInt(result);
+
+            // בדיקה שהערכים הם מספרים תקינים
+            if (isNaN(num1) || isNaN(num2) || isNaN(res)) {
+                showMessage('❌ אופסס.. זה לא נכון. נסו שוב', 'error');
+                return;
             }
+
+            // בדיקה אם זה התרגיל הנכון: 6+2=8
+            if (num1 === 6 && num2 === 2 && res === 8) {
+                showMessage('🎉 כל הכבוד! כעת לחצו על חץ ההמשך וכתבו את הפתרון במקום המתאים כדי לעבור לחדר הבא!', 'success');
+                isCorrect = true;
+                disableInputs();
+                checkBtn.classList.add('hidden');
+                retryBtn.classList.add('hidden');
+                return;
+            }
+
+            // בדיקה אם זה תרגיל חיבור נכון מתמטית
+            if (num1 + num2 === res) {
+                showMessage('🤔 התרגיל המתמטי שכתבתם נכון אבל הוא אינו מתאים לפתרון השאלה בחדר. נסו שוב!', 'warning');
+                retryBtn.classList.remove('hidden');
+                return;
+            }
+
+            showMessage('❌ אופסס.. זה לא נכון. נסו שוב', 'error');
+            retryBtn.classList.remove('hidden');
         }
-        
-        function reset() {
-            dragonFeathers = 6;
-            basketFeathers = 2;
-            addedFeathers = 0;
-            updateDisplay();
-            document.getElementById('feedback').innerHTML = '';
-            document.getElementById('answer').value = '';
+
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+            messageDiv.classList.remove('hidden');
         }
-        
-        updateDisplay();
-        setupDragAndDrop();
+
+        function resetInputs() {
+            firstNumInput.value = '';
+            secondNumInput.value = '';
+            resultInput.value = '';
+            messageDiv.classList.add('hidden');
+            retryBtn.classList.add('hidden');
+            isCorrect = false;
+            enableInputs();
+        }
+
+        function disableInputs() {
+            firstNumInput.disabled = true;
+            secondNumInput.disabled = true;
+            resultInput.disabled = true;
+        }
+
+        function enableInputs() {
+            firstNumInput.disabled = false;
+            secondNumInput.disabled = false;
+            resultInput.disabled = false;
+        }
+
+        checkBtn.addEventListener('click', checkAnswer);
+        retryBtn.addEventListener('click', resetInputs);
+
+        // אפשרות ללחוץ Enter לבדיקה
+        [firstNumInput, secondNumInput, resultInput].forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !isCorrect) {
+                    checkAnswer();
+                }
+            });
+        });
     </script>
 </body>
 </html>
