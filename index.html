@@ -1,129 +1,452 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>אקדמיה לקסומים - חדר בריחה מתמטי</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-      height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; overflow:hidden;
-    }
-    .container { 
-      background:#fff; 
-      border-radius:20px; 
-      padding:25px; 
-      width:90vw;
-      height:50.625vw; /* 90vw * 9/16 = יחס 16:9 */
-      max-height:90vh;
-      max-width:160vh; /* 90vh * 16/9 */
-      box-shadow:0 20px 60px rgba(0,0,0,.3); 
-      overflow:auto; 
-      display:flex; 
-      align-items:center; 
-      justify-content:center; 
-      position:relative 
-    }
-    .container::before{content:'✨'; position:absolute; top:15px; left:15px; font-size:30px; animation:twinkle 2s infinite}
-    .container::after{content:'⭐'; position:absolute; bottom:15px; right:15px; font-size:30px; animation:twinkle 2s infinite 1s}
-    @keyframes twinkle{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.5; transform:scale(1.2)}}
-    .schema{display:flex; flex-direction:column; align-items:center; gap:10px; width:100%; height:100%; justify-content:center}
-    .boxes-container{display:flex; gap:30px; width:100%; max-width:650px; justify-content:center}
-    .box{flex:1; display:flex; flex-direction:column; gap:12px}
-    .box-label{font-size:24px; font-weight:bold; color:#764ba2; text-align:center}
-    .box-input{background:linear-gradient(135deg,#ffeaa7,#fdcb6e); border:3px solid #fdcb6e; border-radius:15px; padding:25px 20px; min-height:100px; display:flex; align-items:center; justify-content:center}
-    .box-input input{width:100%; font-size:40px; font-weight:bold; text-align:center; border:none; background:transparent; color:#2d3436; outline:none}
-    .arrow{font-size:50px; color:#764ba2; margin:5px 0}
-    .result-label{font-size:24px; font-weight:bold; color:#764ba2; text-align:center; margin-bottom:5px}
-    .result-box{background:linear-gradient(135deg,#a29bfe,#6c5ce7); border:3px solid #6c5ce7; border-radius:15px; padding:25px 35px; min-height:100px; display:flex; align-items:center; justify-content:center; max-width:350px; width:100%}
-    .result-box input{width:100%; font-size:40px; font-weight:bold; text-align:center; border:none; background:transparent; color:#fff; outline:none}
-    button{margin-top:10px; padding:14px 45px; font-size:20px; font-weight:bold; color:#fff; background:linear-gradient(135deg,#667eea,#764ba2); border:none; border-radius:12px; cursor:pointer; transition:.3s; box-shadow:0 5px 15px rgba(102,126,234,.4)}
-    button:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(102,126,234,.6)}
-    .message{margin-top:10px; padding:18px; border-radius:12px; font-size:18px; font-weight:bold; text-align:center; display:none; max-width:700px; line-height:1.4}
-    .success{background:linear-gradient(135deg,#55efc4,#00b894); color:#fff; border:3px solid #00b894; display:block}
-    .warning{background:linear-gradient(135deg,#fab1a0,#ff7675); color:#fff; border:3px solid #ff7675; display:block}
-    .error{background:linear-gradient(135deg,#fd79a8,#e84393); color:#fff; border:3px solid #e84393; display:block}
-    .magic-wand{font-size:24px; display:inline-block; animation:wave 1s infinite}
-    @keyframes wave{0%,100%{transform:rotate(0)} 25%{transform:rotate(20deg)} 75%{transform:rotate(-20deg)}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דרקון הנוצות הקסומות</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            height: calc(100vh - 20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        
+        .story {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 1em;
+            line-height: 1.4;
+            border-right: 5px solid #667eea;
+            text-align: center;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+            align-items: center;
+            justify-content: space-around;
+        }
+        
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .dragon-container {
+            text-align: center;
+        }
+        
+        .dragon {
+            font-size: 80px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .feathers-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            background: #f8f9ff;
+            transition: background 0.3s;
+            min-height: 120px;
+            max-width: 350px;
+        }
+        
+        .basket-container {
+            text-align: center;
+        }
+        
+        .basket {
+            font-size: 60px;
+            margin-bottom: 5px;
+        }
+        
+        .basket-label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+        
+        .basket-feathers {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: #fff9e6;
+            border: 3px solid #ffc107;
+            border-radius: 15px;
+            min-height: 100px;
+            max-width: 350px;
+        }
+        
+        .feather {
+            font-size: 40px;
+            animation: fadeIn 0.5s ease-in;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .feather.original {
+            filter: hue-rotate(0deg);
+        }
+        
+        .feather.new {
+            filter: hue-rotate(180deg) brightness(1.2);
+        }
+        
+        .feather:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .new-feather {
+            animation: flyIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes flyIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-100px) rotate(180deg) scale(0);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+        }
+        
+        .counter {
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #667eea;
+            padding: 10px;
+            background: #f0f4ff;
+            border-radius: 10px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .answer-section {
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        input[type="number"] {
+            font-size: 1.3em;
+            padding: 8px;
+            width: 80px;
+            text-align: center;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+        
+        .feedback {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 3px solid #28a745;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 3px solid #dc3545;
+        }
+        
+        .step {
+            background: #fff3cd;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 10px;
+            border-right: 5px solid #ffc107;
+            font-size: 1em;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="schema">
-      <div class="boxes-container">
-        <div class="box">
-          <div class="box-label">התחלה</div>
-          <div class="box-input">
-            <input type="text" id="whole" placeholder="">
-          </div>
+    <div class="container">
+        <h1>🧙‍♂️ דרקון הנוצות הקסומות 🐉</h1>
+        
+        <div class="story">
+            לדרקון של הקוסמים הצעירים היו <strong>6 נוצות קסם</strong>. 
+            המורה נתן להם עוד <strong>2 נוצות חדשות</strong>.
+            <strong>כמה נוצות יש לדרקון עכשיו?</strong>
         </div>
-        <div class="box">
-          <div class="box-label">שינוי</div>
-          <div class="box-input">
-            <input type="text" id="start" placeholder="">
-          </div>
+        
+        <div class="main-content">
+            <div class="left-section">
+                <div class="dragon-container">
+                    <div class="dragon">🐉</div>
+                </div>
+                
+                <div class="counter" id="counter">
+                    נוצות הדרקון: <span id="count">6</span>
+                </div>
+                
+                <div class="feathers-container" id="feathers"></div>
+            </div>
+            
+            <div class="right-section">
+                <div class="basket-container">
+                    <div class="basket">🧺</div>
+                    <div class="basket-label">סל הנוצות של המורה<br>גרור 2 נוצות לדרקון!</div>
+                    <div class="basket-feathers" id="basket-feathers"></div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="arrow">↓</div>
-
-      <div class="result-label">סוף</div>
-      <div class="result-box">
-        <input type="text" id="end" placeholder="">
-      </div>
-
-      <button id="checkBtn">
-        <span class="magic-wand">🪄</span>
-        בדוק תשובה
-        <span class="magic-wand">🪄</span>
-      </button>
-
-      <div id="message" class="message"></div>
+        
+        <div class="buttons">
+            <button onclick="startExercise()">התחל תרגיל</button>
+            <button onclick="reset()">התחל מחדש</button>
+        </div>
+        
+        <div class="answer-section">
+            <div style="margin: 10px 0;">
+                <label style="font-size: 1.1em; font-weight: bold;">התשובה שלי:</label>
+                <input type="number" id="answer" min="0" max="20" placeholder="?" />
+                <button onclick="checkAnswer()">בדוק תשובה</button>
+            </div>
+        </div>
+        
+        <div id="feedback"></div>
     </div>
-  </div>
 
-  <script>
-    function showMessage(kind, html) {
-      const el = document.getElementById('message');
-      el.className = 'message ' + kind;
-      el.innerHTML = html;
-      el.style.display = 'block';
-    }
-    function checkAnswer() {
-      const whole = document.getElementById('whole').value.trim();
-      const start = document.getElementById('start').value.trim();
-      const end   = document.getElementById('end').value.trim();
-
-      const fullAnswer  = whole + '+' + start + '=' + end;
-      const cleanAnswer = fullAnswer.replace(/\s/g, '');
-
-      if (cleanAnswer === '2+6=8' || cleanAnswer === '6+2=8') {
-        showMessage('success','🎉 כל הכבוד! 🎉<br>כעת לחצו על חץ החזרה וכתבו את הפתרון במקום המתאים כדי לעבור לחדר הבא!');
-        return;
-      }
-      if (!whole || !start || !end) {
-        showMessage('error','🤔 אנא מלאו את כל השדות!');
-        return;
-      }
-      const wholeNum = parseInt(whole,10);
-      const startNum = parseInt(start,10);
-      const endNum   = parseInt(end,10);
-      if (isNaN(wholeNum) || isNaN(startNum) || isNaN(endNum)) {
-        showMessage('error','🤔 אנא הכניסו מספרים בלבד!');
-        return;
-      }
-      if (wholeNum + startNum === endNum) {
-        showMessage('warning','✨ התרגיל המתמטי שכתבתם נכון אבל הוא אינו מתאים לפתרון השאלה בחדר. נסו שוב! 💭');
-      } else {
-        showMessage('error','😊 אוי, יש טעות קטנה בחישוב. קחו רגע לחשוב שוב - אתם יכולים! 💪');
-      }
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('checkBtn');
-      if (btn) btn.addEventListener('click', checkAnswer);
-    });
-  </script>
+    <script>
+        let dragonFeathers = 6;
+        let basketFeathers = 2;
+        let addedFeathers = 0;
+        let draggedFeather = null;
+        
+        function createFeather(container, id, isOriginal = true, isDraggable = false) {
+            const feather = document.createElement('div');
+            feather.className = isOriginal ? 'feather original' : 'feather new';
+            feather.textContent = '🪶';
+            feather.id = id;
+            
+            if (isDraggable) {
+                feather.draggable = true;
+                feather.style.cursor = 'grab';
+                
+                feather.addEventListener('dragstart', (e) => {
+                    draggedFeather = e.target;
+                    e.target.style.opacity = '0.5';
+                    e.target.style.cursor = 'grabbing';
+                });
+                
+                feather.addEventListener('dragend', (e) => {
+                    e.target.style.opacity = '1';
+                    e.target.style.cursor = 'grab';
+                });
+            }
+            
+            container.appendChild(feather);
+        }
+        
+        function updateDisplay() {
+            document.getElementById('count').textContent = dragonFeathers;
+            
+            const dragonContainer = document.getElementById('feathers');
+            dragonContainer.innerHTML = '';
+            
+            // 6 נוצות מקוריות
+            for (let i = 0; i < 6; i++) {
+                createFeather(dragonContainer, `dragon-feather-${i}`, true, false);
+            }
+            
+            // נוצות שנוספו (בצבע שונה)
+            for (let i = 0; i < addedFeathers; i++) {
+                createFeather(dragonContainer, `added-feather-${i}`, false, false);
+            }
+            
+            const basketContainer = document.getElementById('basket-feathers');
+            basketContainer.innerHTML = '';
+            for (let i = 0; i < basketFeathers; i++) {
+                createFeather(basketContainer, `basket-feather-${i}`, false, true);
+            }
+        }
+        
+        function setupDragAndDrop() {
+            const dragonArea = document.getElementById('feathers');
+            
+            dragonArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dragonArea.style.background = '#e8f4f8';
+            });
+            
+            dragonArea.addEventListener('dragleave', () => {
+                dragonArea.style.background = '';
+            });
+            
+            dragonArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dragonArea.style.background = '';
+                
+                if (draggedFeather && draggedFeather.id.startsWith('basket-feather')) {
+                    draggedFeather.remove();
+                    basketFeathers--;
+                    dragonFeathers++;
+                    addedFeathers++;
+                    updateDisplay();
+                    
+                    if (addedFeathers === 1) {
+                        document.getElementById('feedback').innerHTML = 
+                            '<div class="step">יפה מאוד! גררת נוצה אחת! גרור עוד נוצה אחת... 🪶</div>';
+                    } else if (addedFeathers === 2) {
+                        document.getElementById('feedback').innerHTML = 
+                            '<div class="step">מעולה! גררת 2 נוצות! עכשיו ספור כמה נוצות יש לדרקון! 🤔</div>';
+                    }
+                }
+            });
+        }
+        
+        function startExercise() {
+            dragonFeathers = 6;
+            basketFeathers = 2;
+            addedFeathers = 0;
+            document.getElementById('feedback').innerHTML = 
+                '<div class="step">הדרקון מתחיל עם 6 נוצות קסם! 🪶<br>עכשיו גרור 2 נוצות מהסל של המורה אל הדרקון! 👆</div>';
+            document.getElementById('answer').value = '';
+            updateDisplay();
+        }
+        
+        function checkAnswer() {
+            const answer = parseInt(document.getElementById('answer').value);
+            const feedback = document.getElementById('feedback');
+            
+            if (isNaN(answer)) {
+                feedback.innerHTML = '<div class="step">אנא הכנס מספר 🔢</div>';
+                return;
+            }
+            
+            if (answer === 8 && dragonFeathers === 8) {
+                feedback.innerHTML = `
+                    <div class="feedback correct">
+                        🎉 כל הכבוד! התשובה נכונה! 🎉
+                        <br>
+                        6 נוצות + 2 נוצות = 8 נוצות
+                        <br>
+                        הדרקון מאושר מאוד! 🐉✨
+                    </div>
+                `;
+            } else if (dragonFeathers !== 8) {
+                feedback.innerHTML = `
+                    <div class="feedback incorrect">
+                        💭 תחילה גרור 2 נוצות מהסל!
+                    </div>
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <div class="feedback incorrect">
+                        💭 לא בדיוק... נסה שוב!
+                        <br>
+                        רמז: ספור את כל הנוצות שליד הדרקון 🪶
+                    </div>
+                `;
+            }
+        }
+        
+        function reset() {
+            dragonFeathers = 6;
+            basketFeathers = 2;
+            addedFeathers = 0;
+            updateDisplay();
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('answer').value = '';
+        }
+        
+        updateDisplay();
+        setupDragAndDrop();
+    </script>
 </body>
 </html>
