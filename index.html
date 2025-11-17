@@ -81,6 +81,10 @@
       </button>
 
       <div id="message" class="message"></div>
+      
+      <button id="retryBtn" style="display:none;">
+        נסו שוב
+      </button>
     </div>
   </div>
 
@@ -90,6 +94,17 @@
       el.className = 'message ' + kind;
       el.innerHTML = html;
       el.style.display = 'block';
+      
+      const retryBtn = document.getElementById('retryBtn');
+      const checkBtn = document.getElementById('checkBtn');
+      
+      if (kind === 'success') {
+        retryBtn.style.display = 'none';
+        checkBtn.style.display = 'none';
+      } else {
+        retryBtn.style.display = 'block';
+        checkBtn.style.display = 'none';
+      }
     }
     function checkAnswer() {
       const whole = document.getElementById('whole').value.trim();
@@ -115,14 +130,26 @@
         return;
       }
       if (wholeNum + startNum === endNum) {
-        showMessage('warning','✨ התרגיל המתמטי שכתבתם נכון אבל הוא אינו מתאים לפתרון השאלה בחדר. נסו שוב! 💭');
+        showMessage('warning','אופס זה עדיין לא נכון');
       } else {
-        showMessage('error','😊 אוי, יש טעות קטנה בחישוב. קחו רגע לחשוב שוב - אתם יכולים! 💪');
+        showMessage('error','אופס זה עדיין לא נכון');
       }
     }
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('checkBtn');
       if (btn) btn.addEventListener('click', checkAnswer);
+      
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          document.getElementById('whole').value = '';
+          document.getElementById('start').value = '';
+          document.getElementById('end').value = '';
+          document.getElementById('message').style.display = 'none';
+          retryBtn.style.display = 'none';
+          document.getElementById('checkBtn').style.display = 'block';
+        });
+      }
     });
   </script>
 </body>
