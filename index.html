@@ -71,7 +71,7 @@
 
       <div class="result-label">סוף</div>
       <div class="result-box">
-        <input type="text" id="end" placeholder="">
+        <div style="font-size:40px; font-weight:bold; color:#fff;">לא ידוע</div>
       </div>
 
       <button id="checkBtn">
@@ -109,31 +109,25 @@
     function checkAnswer() {
       const whole = document.getElementById('whole').value.trim();
       const start = document.getElementById('start').value.trim();
-      const end   = document.getElementById('end').value.trim();
 
-      const fullAnswer  = whole + '+' + start + '=' + end;
+      const fullAnswer  = whole + '+' + start;
       const cleanAnswer = fullAnswer.replace(/\s/g, '');
 
-      if (cleanAnswer === '2+6=8' || cleanAnswer === '6+2=8') {
+      if (cleanAnswer === '2+6' || cleanAnswer === '6+2') {
         showMessage('success','🎉 כל הכבוד! 🎉<br>לחצו על החץ האפור משמאל כדי לעבור לשלב הבא');
         return;
       }
-      if (!whole || !start || !end) {
+      if (!whole || !start) {
         showMessage('error','🤔 אנא מלאו את כל השדות!');
         return;
       }
       const wholeNum = parseInt(whole,10);
       const startNum = parseInt(start,10);
-      const endNum   = parseInt(end,10);
-      if (isNaN(wholeNum) || isNaN(startNum) || isNaN(endNum)) {
+      if (isNaN(wholeNum) || isNaN(startNum)) {
         showMessage('error','🤔 אנא הכניסו מספרים בלבד!');
         return;
       }
-      if (wholeNum + startNum === endNum) {
-        showMessage('warning','אופס זה עדיין לא נכון');
-      } else {
-        showMessage('error','אופס זה עדיין לא נכון');
-      }
+      showMessage('error','אופס זה עדיין לא נכון');
     }
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('checkBtn');
@@ -144,7 +138,6 @@
         retryBtn.addEventListener('click', () => {
           document.getElementById('whole').value = '';
           document.getElementById('start').value = '';
-          document.getElementById('end').value = '';
           document.getElementById('message').style.display = 'none';
           retryBtn.style.display = 'none';
           document.getElementById('checkBtn').style.display = 'block';
